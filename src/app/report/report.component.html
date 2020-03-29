@@ -1,0 +1,59 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div class="container-fluid">
+    <h1>My Goals</h1>
+    <hr>
+  
+    <div class="row">
+      <div class="col-md-6">
+        <div *ngFor='let goal of goals;let i = index'>
+          <div>
+            <h6 id={{i}} appStrikethrough>{{goal.name}} due on {{goal.completeDate|date|uppercase}}</h6>
+            <button (click)='toggleDetails(i)' class="btn btn-primary">Toggle Details</button>
+          </div>
+  
+          <div *ngIf='goal.showDescription'>
+            <app-report-detail  [goal]='goal' (isComplete) = 'deleteGoal($event,i)'></app-report-detail>
+          </div>
+        </div>
+      </div>
+    <div class="col-md-6">
+    <app-report-form (addReport)="addNewReport($event)"></app-report-form>
+  </div>
+  </div>
+    <p *ngIf='goals.length > 5'>You have too many goals</p>
+  </div>
+  
+    <!-- <h1>My Day Goals</h1>
+    <hr>
+    <ol>
+      <div *ngFor='let goal of goals;let i=index'>
+      <li appStrikethrough>{{goal.name}} due on {{goal.completeDate|date|uppercase}}</li>
+      <button (click)='toggleDetails(i)'>Details</button>
+      
+      <app-report-detail *ngIf='goal.showDescription'[goal]='goal'(isComplete)='deleteGoal($event,i)'></app-report-detail>
+      </div>
+    </ol>
+    <p *ngIf='goals.length > 5'>Your goals are too many</p> -->
+    <!-- <p *ngIf='goals.length > 5'>To many goals</p> -->
+  <!-- <h1>{{ username }}</h1>
+<span>Change Name: </span><input [(ngModel)]="username">
+<h3>Posts: {{ totalPosts }}</h3>
+<ul>
+<hr/>
+<div *ngFor="let post of allPosts; let i=index">
+  <button (click)="deletePost(i)">DELETE</button>
+  <h6>{{ post.title }}</h6>
+  <p>{{ post.body }}</p>
+  <hr/>
+</div>
+</ul> -->
+</body>
+</html>
